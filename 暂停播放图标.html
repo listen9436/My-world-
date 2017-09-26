@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body{
+				background: #000;
+			}
+			.music{
+				display: block;
+   				height: 30px;
+  				position: relative;
+  				width: 25px;
+  				cursor: pointer;
+			}
+			.item{
+				width: 2px;
+			    height: 2px;
+			    position: absolute;
+			    top: 50%;
+			    background: #fff;
+			    /*方向*/
+			    transform: translate(0,-50%);
+			    transition: height .2s linear;
+			}
+			.sound_item1{
+				left: 0px;
+			}
+			.sound_item2{
+				left: 6px;
+			}
+			.sound_item3{
+				left: 12px;
+			}
+			.sound_item4{
+				left: 18px;
+			}
+			.sound_item5{
+				left: 24px;
+			}
+		</style>
+		<script src="js/jquery-3.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			$(function(){
+				function aaa(){
+				var a1 = Math.random()*21;
+				var a2 = Math.random()*21;
+				var a3 = Math.random()*21;
+				var a4 = Math.random()*21;
+				var a5 = Math.random()*21;
+				$(".sound_item1").css({height:a1});
+				$(".sound_item2").css({height:a2});
+				$(".sound_item3").css({height:a3});
+				$(".sound_item4").css({height:a4});
+				$(".sound_item5").css({height:a5});
+			}
+			var timer = setInterval(aaa,200);
+			var open = true;
+			var fa = 1;
+			$(".music").click(function(){
+				if(open == true && fa == 1){
+					open = false;
+					clearInterval(timer);
+					$(".item").css({height:2});
+					$("#music")[0].pause();
+					fa = 2;
+				}else{
+					open = true;
+					timer = setInterval(aaa,200);
+					$("#music")[0].play();
+					fa =1;
+				}
+			console.log(open);
+			console.log(fa);
+			});
+
+		})
+		</script>
+	</head>
+	<body>
+		<a class="music">
+			<span class="item sound_item1"></span>
+			<span class="item sound_item2"></span>
+			<span class="item sound_item3"></span>
+			<span class="item sound_item4"></span>
+			<span class="item sound_item5"></span>
+		</a>
+		<audio id="music" src="images/bgm.mp3" loop autoplay></audio>
+	</body>
+</html>
